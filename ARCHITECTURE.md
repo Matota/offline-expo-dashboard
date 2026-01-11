@@ -67,11 +67,11 @@ graph TD
     
     UI -->|Reads/Writes State| Store[Zustand Store]
     
-    Store -->|Async Actions| DB_Utils[DB Repository (db.ts)]
+    Store -->|Async Actions| DB_Utils["DB Repository (db.ts)"]
     
     subgraph Data_Layer [Data Persistence]
         DB_Utils -->|Platform.OS == ios/android| SQLite[(SQLite Database)]
-        DB_Utils -->|Platform.OS == web| Mock[Mock Data (Memory)]
+        DB_Utils -->|Platform.OS == web| Mock["Mock Data (Memory)"]
     end
     
     SQLite -->|Persisted Data| DB_Utils
