@@ -49,4 +49,4 @@ npx expo start --web
 3.  **Analytics**: View aggregated stats like Top Gainer and Total Portfolio Value.
 
 ## 📱 Architecture
-See [architecture_decisions.md](brain/4794f27b-97fc-47f6-9fa8-855e1b31654f/architecture_decisions.md) for details on why we chose this stack.
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for details on why we chose this stack.
