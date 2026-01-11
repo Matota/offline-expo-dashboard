@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useStore } from '../../store/useStore';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryAxis, VictoryScatter } from 'victory-native';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function DashboardScreen() {
-    const { stocks } = useStore();
+    const { stocks, syncWithCloud, isSyncing, lastSynced } = useStore();
 
     // Process data to find the most frequent symbol to chart
     const charData = useMemo(() => {
@@ -43,8 +43,26 @@ export default function DashboardScreen() {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.greeting}>Portfolio Overview</Text>
+                <View style={styles.headerTop}>
+                    <Text style={styles.greeting}>Portfolio Overview</Text>
+                    <TouchableOpacity
+                        onPress={syncWithCloud}
+                        disabled={isSyncing}
+                        style={styles.syncButton}
+                    >
+                        {isSyncing ? (
+                            <ActivityIndicator size="small" color="#000" />
+                        ) : (
+                            <Text style={styles.syncButtonText}>Sync</Text>
+                        )}
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.subtext}>Offline-First Financial Data</Text>
+                {lastSynced && (
+                    <Text style={styles.lastSynced}>
+                        Last Synced: {lastSynced.toLocaleTimeString()}
+                    </Text>
+                )}
             </View>
 
             <View style={styles.card}>
@@ -122,14 +140,35 @@ const styles = StyleSheet.create({
     header: {
         marginBottom: 20,
     },
+    headerTop: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     greeting: {
         fontSize: 28,
         fontWeight: 'bold',
         color: '#fff',
     },
+    syncButton: {
+        backgroundColor: '#4cc9f0',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 20,
+    },
+    syncButtonText: {
+        color: '#000',
+        fontWeight: 'bold',
+        fontSize: 14,
+    },
     subtext: {
         color: '#888',
         fontSize: 16,
+    },
+    lastSynced: {
+        color: '#4cc9f0',
+        fontSize: 12,
+        marginTop: 4,
     },
     card: {
         backgroundColor: '#1e1e1e',
