@@ -53,3 +53,28 @@ We are building a high-performance, offline-first financial dashboard for Androi
 - Use a Platform check.
 - **Mobile**: Use `expo-sqlite` native.
 - **Web**: Experimental support via WebSQL or a mock capability for the demo.
+
+## 4. System Architecture Diagram
+```mermaid
+graph TD
+    User[User] -->|Interacts| UI[UI Layer]
+    
+    subgraph UI_Layer [Screens]
+        Dashboard[Dashboard]
+        Stocks[Stocks CRUD]
+        Analytics[Analytics]
+    end
+    
+    UI -->|Reads/Writes State| Store[Zustand Store]
+    
+    Store -->|Async Actions| DB_Utils[DB Repository (db.ts)]
+    
+    subgraph Data_Layer [Data Persistence]
+        DB_Utils -->|Platform.OS == ios/android| SQLite[(SQLite Database)]
+        DB_Utils -->|Platform.OS == web| Mock[Mock Data (Memory)]
+    end
+    
+    SQLite -->|Persisted Data| DB_Utils
+    Mock -->|Ephemeral Data| DB_Utils
+    DB_Utils -->|Updates| Store
+```
