@@ -25,6 +25,26 @@ This project requires nodejs.
 npm install
 ```
 
+## 💻 Development Setup
+
+### Recommended Tools
+1.  **Code Editor**: [VS Code](https://code.visualstudio.com/) with **Expo Tools** extension.
+2.  **Database Viewer**: [SQLite Viewer](https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer) extension for VS Code to inspect local `.db` files.
+
+### 🍎 Option A: Xcode Installed (Mac Only)
+If you have the full Xcode IDE installed:
+1.  Run `npx expo start`.
+2.  Press `i` to launch the **iOS Simulator**.
+3.  *Pros*: Rapid debugging, easy to inspect database files on disk.
+
+### 📱 Option B: No Xcode (Recommended for Speed)
+If you don't want to install the heavy Xcode (30GB+):
+1.  Download **Expo Go** on your physical iPhone/Android.
+2.  Run `npx expo start`.
+3.  Scan the QR code with your phone.
+4.  *Pros*: Test real offline behavior (Airplane mode), smooth 60fps animations.
+5.  *Alternatives*: Use **Android Studio Emulator** (free, cross-platform) or the **Web** version (`w` key).
+
 ### 2. Running the App
 
 ```bash
