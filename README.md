@@ -68,5 +68,19 @@ npx expo start --web
     *   Add multiple entries for the same symbol with different prices to see the chart line grow!
 3.  **Analytics**: View aggregated stats like Top Gainer and Total Portfolio Value.
 
+## 🧪 Testing
+
+This project includes a unit test suite using **Jest** and **React Test Renderer**.
+We mock native modules (`expo-sqlite`, `react-native-reanimated`) to run tests in a Node.js environment.
+
+### Running Tests
+```bash
+npm test
+```
+
+### What is Tested?
+1.  **Database Utils** (`utils/db.ts`): Verifies that CRUD operations (Add, Get, Delete) generate the correct SQL queries.
+2.  **Zustand Store** (`store/useStore.ts`): Verifies that actions update the global state correctly and interact with the database.
+
 ## 📱 Architecture
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for details on why we chose this stack.
